@@ -3,9 +3,13 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="content">
-                    <img src="{{ asset('images/logo.png') }}" alt="">
+                    <ul>
+                        <li><a href="{{ route('terms') }}">Términos y condiciones</a></li>
+                        <li><a href="{{ route('policy') }}">Políticas de privacidad</a></li>
+                    </ul>
+                    <img src="{{ $pagefield->logo }}" alt="">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo.
+                        {{ $pagefield->footer_text }}
                     </p>
                 </div>
             </div>

@@ -5,7 +5,7 @@
         <div class="linea3"></div>
     </div>
     <a href="" class="nav-brand">
-        BRISAS
+        QUINIELA
     </a>
     <ul class="navbar-nav my-0 first">
         <li class="dropdown lifirst">

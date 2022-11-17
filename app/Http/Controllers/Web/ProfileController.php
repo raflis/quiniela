@@ -12,7 +12,9 @@ use Jenssegers\Agent\Agent;
 use App\Models\Admin\Result;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
+use App\Models\Admin\GameDynamic;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\GameDynamicUser;
 use Illuminate\Support\Facades\Route;
 
 class ProfileController extends Controller
@@ -24,26 +26,8 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $countries = [
-            '' => 'Selecciona tu país',
-            'Perú' => 'Perú',
-            'Colombia' => 'Colombia',
-        ];
-
-        $genders = [
-            '' => 'Seleccione su género',
-            'Masculino' => 'Masculino',
-            'Femenino' => 'Femenino',
-        ];
-
-        $type_document = [
-            '' => 'Seleccione su tipo de documento',
-            'DNI' => 'DNI',
-            'Pasaporte' => 'Pasaporte',
-            'Carnet de extranjería' => 'Carnet de extranjería',
-        ];
-
-        return view('web.profile.index', compact('countries', 'genders', 'type_document'));
+        $users_q = User::where('role', 1)->count();
+        return view('web.profile.index', compact('users_q'));
     }
 
     public function create()
@@ -145,6 +129,40 @@ class ProfileController extends Controller
                 endif;
             endforeach;
             return back()->with('message', 'Predicción guardada con éxito')->with('typealert', 'success');
+        endif;
+    }
+
+    public function saveDynamic(Request $request)
+    {
+        $rules=[
+            'file_front' => 'required|mimes:jpeg,jpg,png,pdf',
+        ];
+
+        $messages=[
+            'file_front.required' => 'Debe subir un archivo para participar',
+            'file_front.mimes' => 'Recuerda subir tu archivo con formato .jpg, .png o .pdf para poder participar',
+        ];
+
+        $validator=Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withInput();
+        else:
+            $request->merge(['user_id' => Auth::user()->id]);
+
+            if($request->hasFile('file_front')):
+                if($request->file('file_front')->isValid()):
+                    $image = $request->file('file_front');
+                    $fileName = $image->getClientOriginalName();
+                    $fileName = Str::slug(explode('.',  $fileName)[0]);
+                    $fileExt = trim($image->getClientOriginalExtension());
+                    $name = $fileName.'__'.time().'.'.$fileExt;
+                    Storage::disk('dynamics')->delete(Auth::user()->avatar);
+                    Storage::disk('dynamics')->put($name, file_get_contents($image));
+                    $request->merge(['file' => $name]);
+                endif;
+            endif;
+            GameDynamicUser::create($request->all());
+            return back()->with('message', 'Dinámica guardada con éxito')->with('typealert', 'success');
         endif;
     }
 }

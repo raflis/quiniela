@@ -2,28 +2,6 @@
 
 @section('content')
 
-<section class="sec1">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                <div class="carousel-header">
-                    <div class="item align-items-center">
-                        <div class="item-left item-profile">
-                            <p>Perfil</p>
-                            <h3>
-                                Bienvenido<br>{{ ucwords(Auth::user()->name) }} {{ ucwords(Auth::user()->lastname) }}
-                            </h3>
-                        </div>
-                        <div class="item-right">
-                            <img src="{{ asset('images/man.png') }}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="sec7">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -51,10 +29,10 @@
                         <div class="formu-right">
                             <div class="points">
                                 <div class="position">
-                                    <p class="btn-default">Posición 1/50</p>
+                                    <p class="btn-default">Posición {{ $users_q }}/{{ $users_q }}</p>
                                 </div>
                                 <div class="points">
-                                    <p class="btn-default">50 puntos</p>
+                                    <p class="btn-default">{{ Auth::user()->points }} puntos</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -64,6 +42,14 @@
                             <div class="form-group">
                                 <label class="input-label">Apellidos</label>
                                 {{ Form::text('lastname', null, ['class' => 'form-control', 'required']) }}
+                            </div>
+                            <div class="form-group">
+                                <label class="input-label">País</label>
+                                {{ Form::select('country', countries(), null, ['class' => 'form-select', 'placeholder' => 'Selecciona tu país', 'required']) }}
+                            </div>
+                            <div class="form-group">
+                                <label class="input-label">Cargo laboral</label>
+                                {{ Form::text('position', null, ['class' => 'form-control', 'required']) }}
                             </div>
                             <div class="form-group">
                                 <label class="input-label">Fecha de Nacimiento</label>

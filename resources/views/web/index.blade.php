@@ -2,30 +2,6 @@
 
 @section('content')
 
-<section class="sec1">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                <div class="carousel-header">
-                    <div class="item">
-                        <div class="item-left">
-                            <h1>
-                                QUINIELA
-                            </h1>
-                            <h2>
-                                2022
-                            </h2>
-                        </div>
-                        <div class="item-right">
-                            <img src="{{ asset('images/man.png') }}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="sec2">
     <div class="container">
         <div class="row justify-content-center">
@@ -39,16 +15,16 @@
                     </div>
                     <div class="item-right">
                         <div class="carousel-upcoming-matches">
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach ($games as $item)
                             <div class="item">
-                                <img src="{{ asset('images/flags/country1.png') }}" alt="">
+                                <img src="{{ asset('images/countries/'.$item->team1->group.$item->team1->order.'.png') }}" alt="">
                                 <p>
-                                    <span>Nov, 20</span><br>
-                                    10:00 PM
+                                    <span>{{ substr(ucwords(\Carbon\Carbon::parse($item->match_date)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->match_date)->format('d') }}</span><br>
+                                    {{ \Carbon\Carbon::parse($item->match_date)->isoFormat('H:mm A') }}
                                 </p>
-                                <img src="{{ asset('images/flags/country2.png') }}" alt="">
+                                <img src="{{ asset('images/countries/'.$item->team2->group.$item->team2->order.'.png') }}" alt="">
                             </div>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -65,22 +41,21 @@
                     RANKING DE PARTICIPANTES
                 </h2>
                 <div class="participant-ranking">
-                    @for ($i = 0; $i < 10; $i++)
+                    @foreach($users as $item)
                     <div class="item">
-                        <div class="image">
+                        <div class="image" style="background-image: url('{{ asset('images/profiles/'.$item->avatar) }}')">
                             <p class="number">
-                                1
+                                {{ $loop->iteration }}
                             </p>
-                            <img src="{{ asset('images/user-man.png') }}" alt="">
                         </div>
                         <h4>
-                            Carlos Barket
+                            {{ $item->name }} {{ $item->lastname }}
                         </h4>
                         <h5>
-                            50 puntos
+                            {{ $item->points }} puntos
                         </h5>
                     </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -97,33 +72,33 @@
                 <div class="content">
                     <div class="table1">
                         <table class="table">
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach($games_a as $item)
                             <tr>
-                                <td class="date"><p>Nov, 20</p></td>
-                                <td><p>QAT</p></td>
-                                <td><p>3</p></td>
-                                <td><p>2</p></td>
-                                <td><p>ECU</p></td>
+                                <td class="date"><p>{{ substr(ucwords(\Carbon\Carbon::parse($item->match_date)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->match_date)->format('d') }}</p></td>
+                                <td><p><img src="{{ asset('images/countries/'.$item->team1->group.$item->team1->order.'.png') }}" alt=""> {{ $item->team1->name }}</p></td>
+                                <td><p>{{ $item->score1 }}</p></td>
+                                <td><p>{{ $item->score2 }}</p></td>
+                                <td><p><img src="{{ asset('images/countries/'.$item->team2->group.$item->team2->order.'.png') }}" alt=""> {{ $item->team2->name }}</p></td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </table>
                     </div>
                     <div class="table1">
                         <table class="table">
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach($games_b as $item)
                             <tr>
-                                <td class="date"><p>Nov, 20</p></td>
-                                <td><p>QAT</p></td>
-                                <td><p>3</p></td>
-                                <td><p>2</p></td>
-                                <td><p>ECU</p></td>
+                                <td class="date"><p>{{ substr(ucwords(\Carbon\Carbon::parse($item->match_date)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->match_date)->format('d') }}</p></td>
+                                <td><p><img src="{{ asset('images/countries/'.$item->team1->group.$item->team1->order.'.png') }}" alt=""> {{ $item->team1->name }}</p></td>
+                                <td><p>{{ $item->score1 }}</p></td>
+                                <td><p>{{ $item->score2 }}</p></td>
+                                <td><p><img src="{{ asset('images/countries/'.$item->team2->group.$item->team2->order.'.png') }}" alt=""> {{ $item->team2->name }}</p></td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </table>
                     </div>
                 </div>
                 <div class="more">
-                    <a class="btn btn-more" href="">Ver más</a>
+                    <a class="btn btn-more" href="{{ route('games_result.16') }}">Ver más</a>
                 </div>
             </div>
         </div>
@@ -138,66 +113,24 @@
                     DATOS CURIOSOS
                 </h2>
                 <div class="content">
+                    @foreach ($posts as $item)
                     <div class="item">
                         <div class="image">
-                            <img src="{{ asset('images/blog1.png') }}" alt="">
+                            <img src="{{ $item->image1 }}" alt="">
                         </div>
                         <div class="description">
-                            <p class="date">Nov, 20</p>
-                            <h3>Maldición de los mundiales</h3>
+                            <p class="date">{{ substr(ucwords(\Carbon\Carbon::parse($item->created_at)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->created_at)->format('d') }}</p>
+                            <h3>{{ $item->name }}</h3>
                             <p class="text">
-                                ¿Qué selección será victima
-                                de la maldición de los
-                                mundiales?
+                                {{ $item->abstract }}
                             </p>
-                            <a href="">Seguir leyendo</a>
+                            <a href="{{ route('post', [$item->slug, $item->id]) }}">Seguir leyendo</a>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="image">
-                            <img src="{{ asset('images/blog2.png') }}" alt="">
-                        </div>
-                        <div class="description">
-                            <p class="date">Nov, 20</p>
-                            <h3>Maldición de los mundiales</h3>
-                            <p class="text">
-                                ¿Qué selección será victima
-                                de la maldición de los
-                                mundiales?
-                            </p>
-                            <a href="">Seguir leyendo</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image">
-                            <img src="{{ asset('images/blog2.png') }}" alt="">
-                        </div>
-                        <div class="description">
-                            <p class="date">Nov, 20</p>
-                            <h3>Maldición de los mundiales</h3>
-                            <p class="text">
-                                ¿Qué selección será victima
-                                de la maldición de los
-                                mundiales?
-                            </p>
-                            <a href="">Seguir leyendo</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image">
-                            <img src="{{ asset('images/blog2.png') }}" alt="">
-                        </div>
-                        <div class="description">
-                            <p class="date">Nov, 20</p>
-                            <h3>Maldición de los mundiales</h3>
-                            <p class="text">
-                                ¿Qué selección será victima
-                                de la maldición de los
-                                mundiales?
-                            </p>
-                            <a href="">Seguir leyendo</a>
-                        </div>
-                    </div>
+                    @endforeach
+                </div>
+                <div class="more">
+                    <a class="btn btn-more" href="{{ route('blog') }}">Ver más datos curiosos</a>
                 </div>
             </div>
         </div>

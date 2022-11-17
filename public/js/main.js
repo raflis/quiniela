@@ -2,6 +2,24 @@ var base = location.protocol+'//'+location.host;
 var route = document.getElementsByName('routeName')[0].getAttribute('content');
 var csrf_token = document.getElementsByName('csrf-token')[0].getAttribute('content');
 
+document.onreadystatechange = function() {
+  if (document.readyState !== "complete") {
+      document.querySelector(
+        "body").style.visibility = "hidden";
+      document.querySelector(
+        ".loading").style.visibility = "visible";
+      document.querySelector(
+        "#loader").style.visibility = "visible";
+  } else {
+      setTimeout(function(){document.querySelector(
+        ".loading").style.display = "none"}, 300);
+      setTimeout(function(){document.querySelector(
+        "#loader").style.display = "none"}, 300);
+      document.querySelector(
+        "body").style.visibility = "visible";
+  }
+};
+
 $(function(){
 
   $('[data-bs-toggle="tooltip"]').tooltip(); 
@@ -101,6 +119,40 @@ $(function(){
       return false;
   })
 
+  $('#form_forget').on('submit', function(e){
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+        type: "POST",
+        url: base + '/myaccount/forget-password',
+        data: formData,
+        dataType: 'json',
+        success: function success(response) {
+          console.log(response);
+          if(response.success == false){
+              $('#alert_forget_error').removeClass('d-none');
+              $('#alert_forget_success').addClass('d-none');
+              $('#form_forget').find(':submit').attr('disabled', false);
+              $('#form_forget').find(':submit').html('RECUPERA TU CONTRASEÑA');
+          }else{
+            $('#alert_forget_success').removeClass('d-none');
+            $('#alert_forget_error').addClass('d-none');
+            $('#form_forget').find(':submit').attr('disabled', false);
+            $('#form_forget').find(':submit').html('RECUPERA TU CONTRASEÑA');
+            $('#email_forget').html('');
+            //window.location.href = base + '/' + response.ruta;
+          }
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+        error: function error(_error3, e) {
+            console.log(_error3);
+            console.log(e);
+        }
+    });
+    return false;
+  })
+
   'use strict';
   window.addEventListener('load', function() {
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -150,7 +202,6 @@ $(function(){
     arrows: true,
     infinite: false,
     autoplay: true,
-    autoplaySpeed: 6000,
     slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: false,
@@ -158,7 +209,7 @@ $(function(){
         {
           breakpoint: 800,
           settings: {
-            slidesToShow: 3,
+            slidesToShow: 1,
             slidesToScroll: 1
           }
         }               
@@ -184,6 +235,46 @@ $(function(){
             }
           }               
       ]
+  });
+
+  $('.carousel-blog-related').slick({
+    dots: false,
+    arrows: true,
+    infinite: false,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: false,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
+  });
+
+  $('.carousel-dynamic-related').slick({
+    dots: false,
+    arrows: true,
+    infinite: false,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    centerMode: false,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
   });
 
   $('.carousel-eventos').slick({

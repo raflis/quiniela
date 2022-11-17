@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Web;
 
+use DB;
+use Str;
 use Auth;
 use Hash;
+use Mail;
 use Validator;
 use App\Models\User;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -40,30 +44,13 @@ class LoginController extends Controller
         if($validator->fails()):
             return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withInput();
         else:
-            $user_login = explode('-', $request->email);
-            if(count($user_login) >= 2):
-                if(strlen($user_login[1]) == 0):
-                    return response()->json(['success' => false]);
-                endif;
-                if(Auth::attempt(['id' => $user_login[1], 'password' => $request->password], true)):
-                    if(Auth::user()->role == 0):
-                        return response()->json(['success' => true, 'ruta' => 'myaccount/profile']);
-                    endif;
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password], true)):
+                if(Auth::user()->role == 0):
                     return response()->json(['success' => true, 'ruta' => 'myaccount/profile']);
-                else:
-                    return response()->json(['success' => false]);
                 endif;
-            endif;
-            
-            if(count($user_login) <= 1):
-                if(Auth::attempt(['email' => $request->email, 'password' => $request->password], true)):
-                    if(Auth::user()->role == 0):
-                        return response()->json(['success' => true, 'ruta' => 'myaccount/profile']);
-                    endif;
-                    return response()->json(['success' => true, 'ruta' => 'myaccount/profile']);
-                else:
-                    return response()->json(['success' => false]);
-                endif;
+                return response()->json(['success' => true, 'ruta' => 'myaccount/profile']);
+            else:
+                return response()->json(['success' => false]);
             endif;
         endif;
     }
@@ -99,7 +86,18 @@ class LoginController extends Controller
             $request->merge(['role' => 1]);
             $request->merge(['avatar' => 'avatar.png']);
             $recorded = User::create($request->all());
-            return back()->with('message', 'Usuario creado con éxito.')->with('typealert', 'success');
+
+            $data = $request->all();
+            $data['fullname'] = ucfirst($request->name).' '.ucfirst($request->lastname);
+            $email = $request->email;
+            //$email = "dennis.orm@hotmail.com";
+            Mail::send('web.emails.welcome', $data, function($message) use ($email)
+            {
+                $message->to($email)->subject('Bienvenido A La Quiniela De La Copa Mundial Qatar 2022, De MarketLogic');
+            });
+
+            return redirect()->route('index', ['mode' => 'login']);
+            //return back()->with('message', 'Usuario creado con éxito.')->with('typealert', 'success');
         endif;
     }
 
@@ -166,9 +164,10 @@ class LoginController extends Controller
             'email.exists' => 'El email no existe en nuestra base de datos',
         ];
 
-        $validator=Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails()):
-            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+            return response()->json(['success' => false]);
+            //return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withInput();
         else:
             $token = Str::random(64);
             DB::table('password_resets')->insert(
@@ -181,9 +180,10 @@ class LoginController extends Controller
             $data['token'] = $token;
             Mail::send('web.emails.forget', $data, function($message) use ($email, $data)
             {
-                $message->to($email)->subject($data['name'].', ¿Olvidaste tu contraseña?');
+                $message->to($email)->subject($data['name'].', Recupera Tu Contraseña De La Quiniela Qatar 2022 De MarketLogic');
             });
-            return redirect()->route('login.index')->with('message', 'Hemos enviado un enlace para restablecer la contraseña al email: '.$email.' Si no lo recibes en unos minutos, revisa tu carpeta de spam.')->with('typealert','success');
+            return response()->json(['success' => true]);
+            //return redirect()->route('login.index')->with('message', 'Hemos enviado un enlace para restablecer la contraseña al email: '.$email.' Si no lo recibes en unos minutos, revisa tu carpeta de spam.')->with('typealert', 'success');
         endif;
     }
 
@@ -198,7 +198,7 @@ class LoginController extends Controller
         $token_last = DB::table('password_resets')->where('email', $email)->orderBy('created_at', 'Desc')->first()->token;
         if($token != $token_last):
             $variable = 'La url ya no se encuentra activa';
-            return view('web.login.reset',compact('variable'));
+            return view('web.login.reset', compact('variable'));
         else:
             $variable = 1;
             return view('web.login.reset',compact('variable', 'email'));
@@ -208,26 +208,27 @@ class LoginController extends Controller
     public function postReset(Request $request)
     {
         $rules=[
-            'newpassword'=>'required|min:6',
-            'renewpassword'=>'required|min:6|same:newpassword',
+            'newpassword' => 'required|min:6',
+            'renewpassword' => 'required|min:6|same:newpassword',
         ];
 
         $messages=[
-            'newpassword.required'=> 'Por favor escriba su nueva contraseña',
-            'renewpassword.required'=> 'Por favor escriba nuevamente su nueva contraseña',
-            'newpassword.min'=> 'La nueva contraseña debe tener al menos 6 caracteres',
-            'renewpassword.min'=> 'La nueva contraseña debe tener al menos 6 caracteres',
-            'renewpassword.same'=> 'Las contraseñas no coinciden',
+            'newpassword.required' => 'Por favor escriba su nueva contraseña',
+            'renewpassword.required' => 'Por favor escriba nuevamente su nueva contraseña',
+            'newpassword.min' => 'La nueva contraseña debe tener al menos 6 caracteres',
+            'renewpassword.min' => 'La nueva contraseña debe tener al menos 6 caracteres',
+            'renewpassword.same' => 'Las contraseñas no coinciden',
         ];
 
         $validator=Validator::make($request->all(), $rules, $messages);
         if($validator->fails()):
-            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+            return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withInput();
         else:
             $user = User::where('email', $request->email)->first();
             $user->password = Hash::make($request->newpassword);
             $user->save();
-            return redirect()->route('login.index')->with('message','Contraseña actualizada con éxito')->with('typealert','success');
+            return redirect()->route('index', ['mode' => 'login']);
+            //return redirect()->route('login.index')->with('message', 'Contraseña actualizada con éxito')->with('typealert', 'success');
         endif;
     }
 }

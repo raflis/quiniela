@@ -7,7 +7,7 @@
         <div class="row layout-header">
             <div class="col-sm-12 header-content">
                 <h1>
-                    <i class="fas fa-bullhorn fa-xs text-white2"></i> Socios
+                    <i class="fas fa-bullhorn fa-xs text-white2"></i> Usuarios
                 </h1>
                 <span class="subtitle">
                     Crear, editar y eliminar.
@@ -40,14 +40,12 @@
                             <tr>
                                 <th>N°</th>
                                 <th>Foto</th>
-                                <th><strong>Usuario Login</strong></th>
                                 <th>Nombre completo</th>
-                                <th>Documento</th>
                                 <th>Cumpleaños</th>
-                                <th>Género</th>
                                 <th>Email</th>
-                                <th>¿Membresía?</th>
-                                <th>Tipo de socio</th>
+                                <th>País</th>
+                                <th>Cargo laboral</th>
+                                <th>Puntos</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -56,21 +54,12 @@
                             <tr>
                                 <td>{{ $users->firstItem() + $loop->index }}</td>
                                 <td><img src="{{ asset('images/profiles/'.$item->avatar) }}" alt="" height=40></td>
-                                <td><strong>{{ $item->document.'-'.$item->id }}</strong></td>
                                 <td>{{ $item->name }} {{ $item->lastname }}</td>
-                                <td>{{ $item->type_document }} {{ $item->document }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->birthday)->format('d/m/Y') }}</td>
-                                <td>{{ $item->gender }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>
-                                    @if ($item->membership == 'active')
-                                        Activa
-                                    @endif
-                                    @if ($item->membership == 'cancelled')
-                                        Cancelada
-                                    @endif
-                                </td>
-                                <td>{{ $item->partner_type }}</td>
+                                <td>{{ $item->country }}</td>
+                                <td>{{ $item->position }}</td>
+                                <td>{{ $item->points }}</td>
                                 <td>
                                     <div style="display: inline-flex">
                                         <a class="btn btn-primary text-white btn-sm mr-1" href="{{ route('users.edit', $item->id) }}">

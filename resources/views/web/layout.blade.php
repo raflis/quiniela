@@ -18,15 +18,24 @@
     @yield('css')
 </head>
 <body>
+    <div class="loading">
+        <div id="loader" class="center-all"></div>
+    </div>
     @include('web.partials.header')
     @yield('content')
     @include('web.partials.footer')
     <script src="{{ asset('js/app.js?v=0') }}"></script>
-    <script src="{{ asset('slick/slick.min.js') }}"></script>
-    <script src="{{ asset('js/simplyCountdown.min.js') }}"></script>
-    <script src="{{ asset('js/wow.min.js') }}"></script>
     <script src="{{ asset('js/main.js?v='.time()) }}"></script>
-    <!--<script src="{{ asset('js/all.js') }}"></script>-->
+    <script src="{{ asset('slick/slick.min.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script>
+        $(function(){
+            @if(request('mode') == 'login')
+            $('#loginModal').modal('show');
+            @endif
+        })
+    </script>
     @yield('script')
+    
 </body>
 </html>

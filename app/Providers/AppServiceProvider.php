@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Slider;
 use Illuminate\Support\Carbon;
 use App\Models\Admin\PageField;
 use Illuminate\Pagination\Paginator;
@@ -34,9 +35,16 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale(config('app.locale'));
         setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
 
-        /*view()->composer('web.partials.footer',function($view){
+        view()->composer('web.partials.header',function($view){
+            $view->with([
+                'pagefield' => PageField::find(1),
+                'sliders' => Slider::where('draft', 0)->orderBy('order', 'Asc')->get()
+            ]);
+        });
+
+        view()->composer('web.partials.footer',function($view){
             $view->with('pagefield', PageField::find(1));
-        });*/
+        });
 
         Paginator::useBootstrap();
     }

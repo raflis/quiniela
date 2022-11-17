@@ -28,7 +28,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::orderBy('match_date', 'Asc')->paginate(24);
+        $games = Game::orderBy('match_date', 'Asc')->where('phase', 'Fase de grupos')->paginate(24);
         return view('admin.games.index', compact('games'));
     }
 
@@ -39,7 +39,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        $teams = Team::orderBy('name', 'ASC')->pluck('name', 'id');
+        $teams = Team::orderBy('name', 'ASC')->where('name', '<>', 'Por definirse')->pluck('name', 'id');
         return view('admin.games.create', compact('teams'));
     }
 
@@ -91,7 +91,7 @@ class GameController extends Controller
      */
     public function edit($id)
     {
-        $teams = Team::orderBy('name', 'ASC')->pluck('name', 'id');
+        $teams = Team::orderBy('name', 'ASC')->where('name', '<>', 'Por definirse')->pluck('name', 'id');
         $game = Game::find($id);
         return view('admin.games.edit', compact('game', 'teams'));
     }

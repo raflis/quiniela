@@ -2,30 +2,6 @@
 
 @section('content')
 
-<section class="sec1">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                <div class="carousel-header">
-                    <div class="item">
-                        <div class="item-left">
-                            <h1>
-                                QUINIELA
-                            </h1>
-                            <h2>
-                                2022
-                            </h2>
-                        </div>
-                        <div class="item-right">
-                            <img src="{{ asset('images/man.png') }}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="login_create">
     <div class="container">
         <div class="row justify-content-center">
@@ -62,7 +38,7 @@
                         <div class="form-check col-md-12">
                             <input class="form-check-input" type="checkbox" value="1" id="legal" name="legal" required>
                             <label class="form-check-label" for="legal">
-                                Declaro que he leído y acepto los <a href="">Términos y Condiciones</a> y <a href="">Política de Privacidad</a> de Quiniela.
+                                Declaro que he leído y acepto los <a href="{{ route('terms') }}">Términos y Condiciones</a> y <a href="{{ route('policy') }}">Política de Privacidad</a> de Quiniela.
                             </label>
                         </div>
                         <div class="form-group col-md-12 text-center">

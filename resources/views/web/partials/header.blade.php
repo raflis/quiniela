@@ -1,18 +1,21 @@
-<section id="header" class="{{ (in_array(Route::currentRouteName(), array('event', 'event_buy')))?'oscuro':'' }}">
+<section id="header" class="{{ (in_array(Route::currentRouteName(), array('dynamics', 'dynamic', 'blog', 'post', 'terms', 'policy', 'login.reset')))?'oscuro':'' }}">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-5 col-md-3 left-menu">
                 <a href="{{ route('index') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="" class="img-fluid img-logo">
+                    <img src="{{ $pagefield->logo }}" alt="" class="img-fluid img-logo">
                 </a>
             </div>
             <div class="col-7 col-md-9 right-menu">
                 <ul class="ul_menu">
-                    <li class="li_nav">
-                        <a href="">Resúmenes</a>
+                    <li class="li_nav" id="nav_first">
+                        <a href="{{ route('index') }}">Inicio</a>
                     </li>
-                    <li class="li_nav">
-                        <a href="">Datos curiosos</a>
+                    <li class="li_nav" id="nav_first">
+                        <a href="{{ route('games_result.16') }}">Resúmenes</a>
+                    </li>
+                    <li class="li_nav" id="nav_first">
+                        <a href="{{ route('blog') }}">Datos curiosos</a>
                     </li>
                     <li class="li_nav">
                         @guest
@@ -38,8 +41,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('predictions') }}">
+                                    <a class="dropdown-item" href="{{ route('predictions.16') }}">
                                         <i class="fa-regular fa-chart-bar"></i> Mis Predicciones
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('dynamics') }}">
+                                        <i class="fa-solid fa-gamepad"></i> Dinámicas
                                     </a>
                                 </li>
                                 <li>
@@ -139,19 +147,52 @@
                 <h3>
                     Recupera tu contraseña
                 </h3>
+                <div class="alert alert-danger alert-dismissible fade show d-none" id="alert_forget_error" role="alert">
+                    El email ingresado no existe o ha ocurrido un error
+                </div>
+                <div class="alert alert-success alert-dismissible fade show d-none" id="alert_forget_success" role="alert">
+                    Hemos enviado un enlace para restablecer la contraseña al email ingresado. Si no lo recibes en unos minutos, revisa tu carpeta de spam.
+                </div>
                 <p class="tit">
                     Ingresa tu correo electrónico y revisa el mensaje que se enviará para restablecer tu contraseña
                 </p>
-                <form action="">
-                    <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                {!! Form::open(['route' => 'login.forget', 'id' => 'form_forget', 'class' => 'needs-validation', 'novalidate']) !!}
+                    <input type="email" class="form-control" name="email" placeholder="Correo electrónico" required id="email_forget">
                     <button type="submit">
                         RECUPERA TU CONTRASEÑA
                     </button>
-                </form>
+                {!! Form::close() !!}
                 <a href="" class="a_back_login">
-                    Olvídelo, ya la recordé
+                    Olvídelo, ya la recordé, iniciar sesión
                 </a>
             </div>
         </div>
     </div>
 </div>
+@if(!in_array(Route::currentRouteName(), array('dynamics', 'dynamic', 'blog', 'post', 'terms', 'policy', 'login.reset')))
+<section class="sec1">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="carousel-header">
+                    @foreach ($sliders as $item)
+                    <div class="item">
+                        <div class="item-left">
+                            <h1>
+                                {{ $item->title1 }}
+                            </h1>
+                            <h2>
+                                {{ $item->title2 }}
+                            </h2>
+                        </div>
+                        <div class="item-right">
+                            <img src="{{ $item->image }}" alt="">
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif

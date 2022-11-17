@@ -10,16 +10,52 @@
             <i class="fas fa-globe text-gray pr-1"></i> Ver Web
         </a>
 
+        <div class="sidenav-menu-heading">Usuarios</div>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('users.index', 'users.create', 'users.edit'))) active @endif" 
+        href="{{ route('users.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Usuarios
+        </a>
+        <a class="nav-link @if(preg_match("/game_dynamic_users/", Route::currentRouteName())) active @endif" 
+        href="{{ route('game_dynamic_users.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Participaciones dinámicas
+        </a>
+
         <div class="sidenav-menu-heading">Páginas</div>
-        <a class="nav-link @if(preg_match("/pagefields.configuration/", Route::currentRouteName())) active @endif" 
-        href="">
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.configuration'))) active @endif" 
+        href="{{ route('pagefields.configuration') }}">
             <i class="fas fa-home text-gray pr-1"></i> Configuración
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.terms'))) active @endif" 
+        href="{{ route('pagefields.terms') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Términos y condiciones
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.policy'))) active @endif" 
+        href="{{ route('pagefields.policy') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Política de privacidad
+        </a>
+
+        <div class="sidenav-menu-heading">Secciones</div>
+        <a class="nav-link @if(preg_match("/game_dynamics/", Route::currentRouteName())) active @endif" 
+        href="{{ route('game_dynamics.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Dinámicas
+        </a>
+        <a class="nav-link @if(preg_match("/sliders/", Route::currentRouteName())) active @endif" 
+        href="{{ route('sliders.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Sliders
+        </a>
+        <a class="nav-link @if(preg_match("/posts/", Route::currentRouteName())) active @endif" 
+        href="{{ route('posts.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Curiosidades
         </a>
 
         <div class="sidenav-menu-heading">Partidos</div>
-        <a class="nav-link @if(preg_match("/games/", Route::currentRouteName())) active @endif" 
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('games.index', 'games.create', 'games.edit'))) active @endif" 
         href="{{ route('games.index') }}">
-            <i class="fas fa-home text-gray pr-1"></i> Partidos
+            <i class="fas fa-home text-gray pr-1"></i> Partidos (Fase grupos)
+        </a>
+        <a class="nav-link @if(preg_match("/games_final/", Route::currentRouteName())) active @endif" 
+        href="{{ route('games_final.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Partidos (Fase final)
         </a>
 
         {{-- <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.choose'))) active @endif" 

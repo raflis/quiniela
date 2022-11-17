@@ -21,14 +21,14 @@
                         <span>
                             Sliders
                         </span>
-                        <a class="btn btn-success" href="{{ route('games.create') }}">
+                        <!--<a class="btn btn-success" href="{{ route('games.create') }}">
                             <span class="icon">
                                 <i class="fas fa-plus px-2 py-1"></i>
                             </span>
                             <span class="text px-2 py-1">
                                 Crear
                             </span>
-                        </a>
+                        </a>-->
                     </div>
                     <div class="px-3">
                         @include('admin.includes.alert')
