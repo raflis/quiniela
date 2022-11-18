@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Admin\Slider;
 use Illuminate\Support\Carbon;
 use App\Models\Admin\PageField;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
         /*$this->app->bind('path.public',function(){
             return'/u842821089/domains/mned.online/public_html';
         });*/
+
+        if(env('FORCE_HTTPS', true)) {
+            URL::forceScheme('https');
+        }
 
         Carbon::setUTF8(true);
         Carbon::setLocale(config('app.locale'));
