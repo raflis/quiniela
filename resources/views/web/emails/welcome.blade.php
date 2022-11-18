@@ -160,30 +160,13 @@
 		  <td colspan="2"><table width="69%" border="0" cellspacing="0" cellpadding="0">
 		    <tbody>
 		      <tr>
-		        <td width="26%">
-				  <p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: bold;text-align: left;margin:0">
-        3 puntos
-		      
-		      </p>
-				  </td>
-		        <td width="74%"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0">
-        Si aciertas al equipo ganador
-		      
-		      </p></td>
+		        <td width="100%" colspan="2">
+		          <p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0">
+		            Si aciertas el marcador tendrás 3 puntos.</p></td>
 		        </tr>
 		      <tr>
-		        <td><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: bold;text-align: left;margin:0">
-		          1 punto
-		          
-		          </p></td>
-		        <td width="74%"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0"> Si aciertas al empate </p></td>
-		        </tr>
-		      <tr>
-		        <td><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: bold;text-align: left;margin:0">
-		          0 puntos
-		          
-		          </p></td>
-		        <td width="74%"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0"> Si fallas en tu pronóstico</p></td>
+		        <td colspan="2"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0">
+		          Si aciertas al resultado ganarás 1 punto.</p></td>
 		        </tr>
 		      </tbody>
 		    </table></td>
@@ -196,7 +179,20 @@
 		  </tr>
 		<tr>
 		  <td>&nbsp;</td>
-		  <td colspan="2"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0"> ¡Comparte tu pasión futbolera con los demás MarketLovers! <br>
+		  <td colspan="2"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: bold;text-align: left;margin:0">
+		          El ganador será quien más puntos sume al final del Mundial
+		          
+		          </p></td>
+		  <td>&nbsp;</td>
+		  </tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td colspan="2">&nbsp;</td>
+		  <td>&nbsp;</td>
+		  </tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td colspan="2"><p style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, 'sans-serif'; font-size: 17px; color: #333333;line-height: 20px;font-weight: regular;text-align: left;margin:0"> 
 		    Las fases de Octavos de Final, Cuartos de Final, Semifinales y Final se habilitarán una vez que se conozcan las selecciones que vayan avanzando.
 			<br><br>
 			Demuestra que eres el MarketLover más futbolero y si tienes más puntos acumulados te coronarás CAMPEÓN.
