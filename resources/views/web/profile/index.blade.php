@@ -36,6 +36,9 @@
                                         @php $order = $n; @endphp
                                         @endif
                                     @endforeach
+                                    @if(Auth::user()->role == 0)
+                                    @php $order = 0; @endphp
+                                    @endif
                                     <p class="btn-default">Posición {{ $order }}/{{ $users_q->count() }}</p>
                                 </div>
                                 <div class="points">
