@@ -30,5 +30,11 @@
   </div>
 </div>
 
-<div class="col-md-4"></div>
+<div class="form-group col-sm-4">
+  {{ Form::label('game_over', '¿Finalizó el partido?:') }} <code>*</code>
+  {{ Form::select('game_over', [0 => 'No', 1 => 'Si'], null, ['class' => 'custom-select', 'placeholder' => 'Selecciona', 'required']) }}
+  <div class="invalid-feedback">
+    Ingrese un resultado
+  </div>
+</div>
 @endif

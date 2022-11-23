@@ -1,5 +1,24 @@
 <?php
 
+function calculate_hits($forecast1, $forecast2, $result1, $result2)
+{
+    if($forecast1 == 'NO' || $forecast2 == 'NO'):
+        return NULL;
+    else:
+        if(($forecast1 == $result1) and ($forecast2 == $result2)): //marcador exacto
+            return '3 puntos';
+        elseif(($forecast1 == $forecast2) and ($result1 == $result2)): //empate
+            return '1 punto';
+        elseif((($forecast1 - $forecast2) < 0) and (($result1 - $result2) < 0)): //ganador
+            return '1 punto';
+        elseif((($forecast1 - $forecast2) > 0) and (($result1 - $result2) > 0)): //ganador
+            return '1 punto';
+        else:
+            return NULL;
+        endif;
+    endif;
+}
+
 function getRole($id)
 {
     $roles = [

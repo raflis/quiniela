@@ -12,7 +12,7 @@ class Game extends Model
     protected $table = 'games';
 
     protected $fillable = [
-        'team1_id', 'team2_id', 'score1', 'score2', 'match_date', 'phase',
+        'team1_id', 'team2_id', 'score1', 'score2', 'match_date', 'game_over', 'phase',
     ];
 
     public function team1()

@@ -21,14 +21,24 @@
                         <span>
                             Usuarios
                         </span>
-                        <a class="btn btn-success" href="{{ route('users.create') }}">
-                            <span class="icon">
-                                <i class="fas fa-plus px-2 py-1"></i>
-                            </span>
-                            <span class="text px-2 py-1">
-                                Crear
-                            </span>
-                        </a>
+                        <div>
+                            <a href="{{ route('users.points') }}" class="btn btn-warning">
+                                <span class="icon">
+                                    <i class="fas fa-spinner px-2 py-1"></i>
+                                </span>
+                                <span class="text px-2 py-1">
+                                    Actualizar puntos de los participantes
+                                </span>
+                            </a>
+                            <a class="btn btn-success" href="{{ route('users.create') }}">
+                                <span class="icon">
+                                    <i class="fas fa-plus px-2 py-1"></i>
+                                </span>
+                                <span class="text px-2 py-1">
+                                    Crear
+                                </span>
+                            </a>
+                        </div>
                     </div>
                     <div class="px-3">
                         @include('admin.includes.alert')
@@ -59,7 +69,7 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->country }}</td>
                                 <td>{{ $item->position }}</td>
-                                <td>{{ $item->points }}</td>
+                                <td>{{ $item->points_total }}</td>
                                 <td>
                                     <div style="display: inline-flex">
                                         <a class="btn btn-primary text-white btn-sm mr-1" href="{{ route('users.edit', $item->id) }}">

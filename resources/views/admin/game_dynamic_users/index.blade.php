@@ -21,14 +21,6 @@
                         <span>
                             Participantes dinámicas
                         </span>
-                        <a class="btn btn-success" href="{{ route('game_dynamic_users.create') }}">
-                            <span class="icon">
-                                <i class="fas fa-plus px-2 py-1"></i>
-                            </span>
-                            <span class="text px-2 py-1">
-                                Crear
-                            </span>
-                        </a>
                     </div>
                     <div class="px-3">
                         @include('admin.includes.alert')

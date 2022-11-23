@@ -43,6 +43,7 @@
                                 <th>Equipo 2</th>
                                 <th>Fase</th>
                                 <th>Fecha del partido</th>
+                                <th>¿Finalizó el partido?</th>
                                 <th>Resultado Equipo 1</th>
                                 <th>Resultado Equipo 2</th>
                                 <th>Acciones</th>
@@ -68,6 +69,7 @@
                                 </td>
                                 <td>{{ $item->phase }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->match_date)->format('d/m/Y H:i:s') }}</td>
+                                <td>{{ ($item->game_over == 0)?'Pendiente':'Finalizado' }}</td>
                                 <td>{{ $item->score1 }}</td>
                                 <td>{{ $item->score2 }}</td>
                                 <td>

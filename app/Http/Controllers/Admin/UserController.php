@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Hash;
 use Validator;
 use App\Models\User;
+use App\Models\Admin\Result;
 use Illuminate\Http\Request;
 use App\Models\Admin\District;
 use App\Models\Admin\Province;
@@ -29,6 +30,40 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function generate_points()
+     {
+        User::orderBy('id', 'Asc')->update(['points1' => 0]);
+        
+        $results = Result::whereHas('game', function($q){
+            $q->where('game_over', 1);
+        })->get();
+
+        foreach($results as $item):
+            $user = User::find($item->user_id);
+            if(($item->result1 == $item->game->score1) and ($item->result2 == $item->game->score2)): //marcador exacto
+                $user->points1 += 3;
+                $user->save();
+            elseif(($item->result1 == $item->result2) and ($item->game->score1 == $item->game->score2)): //empate
+                $user->points1 += 1;
+                $user->save();
+            elseif((($item->result1 - $item->result2) < 0) and (($item->game->score1 - $item->game->score2) < 0)): //ganador
+                $user->points1 += 1;
+                $user->save();
+            elseif((($item->result1 - $item->result2) > 0) and (($item->game->score1 - $item->game->score2) > 0)): //ganador
+                $user->points1 += 1;
+                $user->save();
+            endif;
+        endforeach;
+
+        $users = User::get();
+        foreach($users as $ite):
+            $ite->points_total = $ite->points + $ite->points1;
+            $ite->save();
+        endforeach;
+
+        return redirect()->route('users.index')->with('message', 'Puntos actualizados con éxito.')->with('typealert', 'success'); 
+     }
     
     public function index()
     {

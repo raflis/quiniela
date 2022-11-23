@@ -14,5 +14,6 @@ Route::prefix('/admin')->group(function(){
     Route::resource('sliders', App\Http\Controllers\Admin\SliderController::class);
     Route::resource('game_dynamics', App\Http\Controllers\Admin\GameDynamicController::class);
     Route::resource('game_dynamic_users', App\Http\Controllers\Admin\GameDynamicUserController::class);
+    Route::get('users/generate_points', [App\Http\Controllers\Admin\UserController::class, 'generate_points'])->name('users.points');
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });

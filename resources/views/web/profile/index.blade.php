@@ -29,10 +29,17 @@
                         <div class="formu-right">
                             <div class="points">
                                 <div class="position">
-                                    <p class="btn-default">Posición {{ $users_q }}/{{ $users_q }}</p>
+                                    @php $n = 0; @endphp
+                                    @foreach ($users_q as $item)
+                                        @php $n++; @endphp
+                                        @if($item->id == Auth::user()->id)
+                                        @php $order = $n; @endphp
+                                        @endif
+                                    @endforeach
+                                    <p class="btn-default">Posición {{ $order }}/{{ $users_q->count() }}</p>
                                 </div>
                                 <div class="points">
-                                    <p class="btn-default">{{ Auth::user()->points }} puntos</p>
+                                    <p class="btn-default">{{ Auth::user()->points_total }} puntos</p>
                                 </div>
                             </div>
                             <div class="form-group">

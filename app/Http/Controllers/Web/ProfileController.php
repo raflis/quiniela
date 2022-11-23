@@ -26,7 +26,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $users_q = User::where('role', 1)->count();
+        $users_q = User::where('role', 1)->orderBy('points_total', 'Desc')->get();
         return view('web.profile.index', compact('users_q'));
     }
 

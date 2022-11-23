@@ -52,7 +52,7 @@
                             {{ $item->name }} {{ $item->lastname }}
                         </h4>
                         <h5>
-                            {{ $item->points }} puntos
+                            {{ $item->points_total }} puntos
                         </h5>
                     </div>
                     @endforeach

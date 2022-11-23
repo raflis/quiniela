@@ -20,7 +20,7 @@ class WebController extends Controller
     public function index()
     {
         $agent = new Agent();
-        $games = Game::orderBy('match_date', 'Asc')->get();
+        $games = Game::whereDate('match_date', '>=', \Carbon\Carbon::now()->toDateTimeString())->orderBy('match_date', 'Asc')->get();
         $posts = Post::where('draft', 0)->orderBy('order', 'Asc')->take(4)->get();
         $games_a = Game::whereHas('team1', function($q){
             $q->where('group', 'A');
@@ -28,7 +28,7 @@ class WebController extends Controller
         $games_b = Game::whereHas('team1', function($q){
             $q->where('group', 'B');
         })->where('phase', 'Fase de grupos')->orderBy('match_date', 'Asc')->get();
-        $users = User::where('role', 1)->orderBy('points', 'Desc')->get();
+        $users = User::where('role', 1)->orderBy('points_total', 'Desc')->get();
         return view('web.index', compact('agent', 'games', 'posts', 'games_a', 'games_b', 'users'));
     }
 

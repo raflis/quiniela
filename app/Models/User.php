@@ -28,6 +28,8 @@ class User extends Authenticatable
         'avatar',
         'email',
         'points',
+        'points1',
+        'points_total',
         'password',
         'country',
         'position',
