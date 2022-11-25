@@ -72,7 +72,7 @@
                 <div class="content">
                     <div class="table1">
                         <table class="table">
-                            @foreach($games_a as $item)
+                            @foreach($games1 as $item)
                             <tr>
                                 <td class="date"><p>{{ substr(ucwords(\Carbon\Carbon::parse($item->match_date)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->match_date)->format('d') }}</p></td>
                                 <td><p><img src="{{ asset('images/countries/'.$item->team1->group.$item->team1->order.'.png') }}" alt=""> {{ $item->team1->name }}</p></td>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="table1">
                         <table class="table">
-                            @foreach($games_b as $item)
+                            @foreach($games2 as $item)
                             <tr>
                                 <td class="date"><p>{{ substr(ucwords(\Carbon\Carbon::parse($item->match_date)->formatLocalized('%B')), 0, 3) }}, {{ \Carbon\Carbon::parse($item->match_date)->format('d') }}</p></td>
                                 <td><p><img src="{{ asset('images/countries/'.$item->team1->group.$item->team1->order.'.png') }}" alt=""> {{ $item->team1->name }}</p></td>
