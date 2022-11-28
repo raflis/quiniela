@@ -43,7 +43,7 @@
                 <div class="participant-ranking">
                     @foreach($users as $item)
                     <div class="item">
-                        <div class="image" style="background-image: url('{{ ($item->avatar == 'avatar.png')?asset('images/profiles/'.$item->avatar):asset('images/profiles/avatar2.png') }}')">
+                        <div class="image" style="background-image: url('{{ ($item->avatar != 'avatar.png')?asset('images/profiles/'.$item->avatar):asset('images/profiles/avatar2.png') }}')">
                             <p class="number">
                                 {{ $loop->iteration }}
                             </p>
