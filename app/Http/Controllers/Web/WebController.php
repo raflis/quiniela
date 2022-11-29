@@ -28,8 +28,8 @@ class WebController extends Controller
         $games_b = Game::whereHas('team1', function($q){
             $q->where('group', 'B');
         })->where('phase', 'Fase de grupos')->orderBy('match_date', 'Asc')->get();
-        $games1 = Game::whereDate('match_date', '2022-11-28')->get();
-        $games2 = Game::whereDate('match_date', '2022-11-29')->get();
+        $games1 = Game::whereDate('match_date', '2022-11-29')->get();
+        $games2 = Game::whereDate('match_date', '2022-11-30')->get();
         $users = User::where('role', 1)->orderBy('points_total', 'Desc')->get();
         return view('web.index', compact('agent', 'games', 'posts', 'games_a', 'games_b', 'users', 'games1', 'games2'));
     }
