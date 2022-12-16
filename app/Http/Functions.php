@@ -44,6 +44,7 @@ function phases()
         'Octavos de final' => 'Octavos de final',
         'Cuartos de final' => 'Cuartos de final',
         'Semifinales' => 'Semifinales',
+        'Tercer lugar' => 'Tercer lugar',
         'Final' => 'Final',
     ];
     return $phases;

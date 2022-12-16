@@ -11,17 +11,17 @@
                 </h2>
                 <ul class="ul_links">
                     <li><a class="btn" href="{{ route('games_result.16') }}">Fase de grupos</a></li>
-                    <li><a class="btn active" href="{{ route('games_result.8') }}">Octavos de final</a></li>
+                    <li><a class="btn" href="{{ route('games_result.8') }}">Octavos de final</a></li>
                     <li><a class="btn" href="{{ route('games_result.4') }}">Cuartos de final</a></li>
                     <li><a class="btn" href="{{ route('games_result.2') }}">Semifinales</a></li>
-                    <li><a class="btn" href="{{ route('games_result.3') }}">Tercer lugar</a></li>
+                    <li><a class="btn active" href="{{ route('games_result.3') }}">Tercer lugar</a></li>
                     <li><a class="btn" href="{{ route('games_result.1') }}">Final</a></li>
                 </ul>
                 <div class="content content2">
                     <div class="table1">
                         <table class="table">
                             <tr>
-                                <td colspan="5"><p class="tit">Octavos de final</p></td>
+                                <td colspan="5"><p class="tit">Tercer lugar</p></td>
                             </tr>
                             @foreach($games as $item)
                             <tr>

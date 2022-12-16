@@ -28,8 +28,8 @@ class WebController extends Controller
         $games_b = Game::whereHas('team1', function($q){
             $q->where('group', 'B');
         })->where('phase', 'Fase de grupos')->orderBy('match_date', 'Asc')->get();
-        $games1 = Game::whereDate('match_date', '2022-11-29')->get();
-        $games2 = Game::whereDate('match_date', '2022-11-30')->get();
+        $games1 = Game::whereDate('match_date', '2022-12-17')->get();
+        $games2 = Game::whereDate('match_date', '2022-12-18')->get();
         $users = User::where('role', 1)->orderBy('points_total', 'Desc')->get();
         return view('web.index', compact('agent', 'games', 'posts', 'games_a', 'games_b', 'users', 'games1', 'games2'));
     }
@@ -90,6 +90,13 @@ class WebController extends Controller
         $agent = new Agent();
         $games = Game::where('phase', 'Final')->orderBy('match_date', 'Asc')->get();
         return view('web.games_result1', compact('agent', 'games'));
+    }
+
+    public function games_result3()
+    {
+        $agent = new Agent();
+        $games = Game::where('phase', 'Tercer lugar')->orderBy('match_date', 'Asc')->get();
+        return view('web.games_result3', compact('agent', 'games'));
     }
 
     public function predictions16()
@@ -198,6 +205,23 @@ class WebController extends Controller
         endforeach;
         $pagefield = PageField::find(1);
         return view('web.predictions1', compact('pagefield', 'games', 'results_all'));
+    }
+
+    public function predictions3()
+    {
+        $games = Game::where('phase', 'Tercer lugar')->orderBy('match_date', 'Asc')->get();
+
+        $results_all = [];
+        $results = Auth::user()->results;
+        foreach($results as $r):
+            $var = [
+                    'result1' => $r->result1,
+                    'result2' => $r->result2,
+            ];
+            $results_all['game_'.$r->game_id] = $var;
+        endforeach;
+        $pagefield = PageField::find(1);
+        return view('web.predictions3', compact('pagefield', 'games', 'results_all'));
     }
     
     public function blog()

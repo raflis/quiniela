@@ -71,6 +71,11 @@
                         </div>
 
                         <div class="form-group col-sm-12">
+                          {{ Form::label('end_phase3', 'Fin para predecir "Tercer lugar":') }} <code>*</code>
+                          {{ Form::datetimeLocal('end_phase3', null, ['class' => 'form-control', 'required']) }}
+                        </div>
+
+                        <div class="form-group col-sm-12">
                           {{ Form::label('end_phase1', 'Fin para predecir "Final":') }} <code>*</code>
                           {{ Form::datetimeLocal('end_phase1', null, ['class' => 'form-control', 'required']) }}
                         </div>

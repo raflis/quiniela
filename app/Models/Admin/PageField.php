@@ -17,6 +17,6 @@ class PageField extends Model
 
     protected $fillable = [
         'logo', 'footer_text', 'game_points', 'terms', 'policy',
-        'end_phase16', 'end_phase8', 'end_phase4', 'end_phase2', 'end_phase1',
+        'end_phase16', 'end_phase8', 'end_phase4', 'end_phase2', 'end_phase1', 'end_phase3',
     ];
 }

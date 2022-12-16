@@ -12,8 +12,8 @@
                 <li><a class="btn" href="{{ route('predictions.16') }}">Fase de grupos</a></li>
                 <li><a class="btn" href="{{ route('predictions.8') }}">Octavos de final</a></li>
                 <li><a class="btn" href="{{ route('predictions.4') }}">Cuartos de final</a></li>
-                <li><a class="btn active" href="{{ route('predictions.2') }}">Semifinales</a></li>
-                <li><a class="btn" href="{{ route('predictions.3') }}">Tercer lugar</a></li>
+                <li><a class="btn" href="{{ route('predictions.2') }}">Semifinales</a></li>
+                <li><a class="btn active" href="{{ route('predictions.3') }}">Tercer lugar</a></li>
                 <li><a class="btn" href="{{ route('predictions.1') }}">Final</a></li>
             </ul>
             <p class="text">* Complete los resultados de todos los partidos por grupos y guarde sus resultados para ganar puntos</p>
@@ -24,7 +24,7 @@
             @csrf
             <div class="col-md-8">
                 <div class="title">
-                    <p>Semifinales</p>
+                    <p>Tercer lugar</p>
                 </div>
                 <div class="table_group">
                     <table class="table">
@@ -49,7 +49,7 @@
                     </table>
                 </div>
             </div>
-            @if(Carbon\Carbon::now()->toDateTimeString() <= $pagefield->end_phase2)
+            @if(Carbon\Carbon::now()->toDateTimeString() <= $pagefield->end_phase3)
             <div class="col-md-12 text-center">
                 <button class="btn btn-confirmar">Confirmar</button>
             </div>

@@ -14,6 +14,7 @@
                     <li><a class="btn" href="{{ route('games_result.8') }}">Octavos de final</a></li>
                     <li><a class="btn active" href="{{ route('games_result.4') }}">Cuartos de final</a></li>
                     <li><a class="btn" href="{{ route('games_result.2') }}">Semifinales</a></li>
+                    <li><a class="btn" href="{{ route('games_result.3') }}">Tercer lugar</a></li>
                     <li><a class="btn" href="{{ route('games_result.1') }}">Final</a></li>
                 </ul>
                 <div class="content content2">

@@ -13,6 +13,7 @@
                 <li><a class="btn" href="{{ route('predictions.8') }}">Octavos de final</a></li>
                 <li><a class="btn active" href="{{ route('predictions.4') }}">Cuartos de final</a></li>
                 <li><a class="btn" href="{{ route('predictions.2') }}">Semifinales</a></li>
+                <li><a class="btn" href="{{ route('predictions.3') }}">Tercer lugar</a></li>
                 <li><a class="btn" href="{{ route('predictions.1') }}">Final</a></li>
             </ul>
             <p class="text">* Complete los resultados de todos los partidos por grupos y guarde sus resultados para ganar puntos</p>
